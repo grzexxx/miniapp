@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymelef.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<center>
+
+    <form action="/user/register" method="post" th:object="${registerForm}">
+        Nickname: <input th:field="*{nickname}" type="text"><br/>
+        Email: <input th:field="*{email}" type="text"><br/>
+        Password: <input th:field="*{password}" type="text"><br/>
+
+        <input type="submit" value="Register">
+
+    </form>
+</center>
+</body>
+</html>
