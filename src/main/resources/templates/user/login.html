@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
-<form action="login.html" method="post" th:object="${UserForm}">
+<div th:if="${isLogged !=null && !isLogged}" class="alert alert-danger" role="alert">
+    Email or password dont match!
+</div>
+
+<header style="color: aqua"><h1> Fill to login </h1></header>
+
+<form action="/user/login" method="post" th:object="${loginForm}">
 
     Email: <input th:field="*{email}" type="text"><br/>
-    Password: <input th:field = "*{password}" type="text"><br/>
+    Password: <input th:field="*{password}" type="text"><br/>
 
     <input type="submit" value="Login">
 

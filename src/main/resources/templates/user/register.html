@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 <body>
 <center>
 
+    <header style="color: aqua"> <h1> Fill register form </h1></header>
+
+    <div th:if="${isRegistered !=null && !isRegistered}" class="alert alert-danger" role="alert">
+        Email is used!
+    </div>
+
+    <div th:if="${isRegister}" class="alert alert-success" role="alert">
+        Done!
+    </div>
+    <br/>
+
     <form action="/user/register" method="post" th:object="${registerForm}">
         Nickname: <input th:field="*{nickname}" type="text"><br/>
         Email: <input th:field="*{email}" type="text"><br/>
-        Password: <input th:field="*{password}" type="text"><br/>
+        Password: <input th:field="*{password}" type="password"><br/>
+        Password again: <input th:field ="*{repeatPassword}" type="password"><br/>
 
         <input type="submit" value="Register">
 

@@ -7,6 +7,7 @@ public class RegisterForm {
 
     private String nickname;
     private String password;
+    private String repeatedPassword;
     private String email;
 
 }
