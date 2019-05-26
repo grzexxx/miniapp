@@ -17,6 +17,9 @@ public class AuthController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    SessionService sessionService;
+
     @GetMapping("/user/register")
     public String register(Model model) {
         model.addAttribute("registerForm", new RegisterForm());
@@ -67,9 +70,11 @@ public class AuthController {
         return "user/logged";
     }
 
-    @GetMapping ("user/logout")
-    public String logout (Model model){
-        return "user/logout";
+    @GetMapping("user/logout")
+    public String logout(Model model) {
+        userService.logoutUser();
+        return "redirect:/user/login";
     }
+
 
 }

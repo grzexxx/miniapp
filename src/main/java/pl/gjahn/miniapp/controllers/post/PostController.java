@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.gjahn.miniapp.model.form.PostForm;
 import pl.gjahn.miniapp.model.service.PostService;
 import pl.gjahn.miniapp.model.service.SessionService;
@@ -31,9 +32,12 @@ public class PostController {
     }
 
     @PostMapping("/user/post/add")
-    public String add(@ModelAttribute PostForm postForm) {
+    public String add(@ModelAttribute PostForm postForm,
+                      RedirectAttributes redirectAttributes) {
 
         postService.addPost(postForm);
+
+        redirectAttributes.addFlashAttribute("info", "New post added");
         return "redirect:/user/dashboard";
 
     }

@@ -28,6 +28,9 @@ public class PostService {
         post.setUser(user);
 
         postRepository.save(post);
+    }
 
+    public Iterable<PostEntity> getAllPosts(){
+        return postRepository.findTop10ByOrderByIdDesc();
     }
 }

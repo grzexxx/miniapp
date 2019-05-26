@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -14,33 +13,28 @@
 <th:block th:replace="user/inc/nav :: nav"></th:block>
 
 <center>
-
+    <h1> Dashboard</h1>
     <div style="width: 60%; margin-top: 50px">
-        <div class="card">
-            <h5 class="card-header">Featured</h5>
-            <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last comment: 5 min ago</small>
-            </div>
-        </div>
-        <br/>
 
-        <div class="card">
-            <h5 class="card-header">Featured</h5>
-            <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div th:if="${info != null}" th:text="${info}" class="alert alert-success" role="alert"></div>
+
+        <th:block th:each="post : ${posts}">
+            <div class="card">
+                <h5 class="card-header" th:text="${post.getPostName()}"></h5>
+                <div class="card-body">
+
+                    <p class="card-text" style="overflow:hidden " th:text="${post.getPostText()}"></p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last comment: 5 min ago</small>
+                </div>
             </div>
-            <div class="card-footer">
-                <small class="text-muted">Last comment: 5 min ago</small>
-            </div>
-        </div>
+            <br/>
+        </th:block>
     </div>
+
+
 </center>
 </body>
 </html>

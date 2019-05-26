@@ -56,6 +56,13 @@ public class UserService {
         return false;
     }
 
+    public boolean logoutUser (){
+        sessionService.setLogin(false);
+        sessionService.setNickname("");
+        sessionService.setUserId(-1);
+        return true;
+    }
+
     public boolean passwordMatches(String password, String repeatPassword) {
         if (password.equals(repeatPassword)) {
             return true;

@@ -7,5 +7,7 @@ import pl.gjahn.miniapp.model.entity.PostEntity;
 @Repository
 public interface PostRepository extends CrudRepository <PostEntity, Integer> {
 
+    Iterable<PostEntity> findTop10ByOrderByIdDesc();
+
 
 }
