@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<th:block th:replace="user/inc/nav :: nav"></th:block>
+
 <div th:if="${isLogged !=null && !isLogged}" class="alert alert-danger" role="alert">
     Email or password dont match!
 </div>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.gjahn.miniapp.model.form.LoginForm;
 import pl.gjahn.miniapp.model.form.RegisterForm;
+import pl.gjahn.miniapp.model.service.SessionService;
 import pl.gjahn.miniapp.model.service.UserService;
 
 @Controller
@@ -54,15 +55,21 @@ public class AuthController {
 
         boolean isLogged = userService.loginUser(loginForm);
         if (userService.loginUser(loginForm)) {
-            return "redirect:/user/logged";
+            return "redirect:/user/dashboard";
         }
         model.addAttribute("isLogged", isLogged);
         return "user/login";
 
     }
-    @GetMapping ("/user/logged")
-    public String logged (Model model){
+
+    @GetMapping("/user/logged")
+    public String logged(Model model) {
         return "user/logged";
+    }
+
+    @GetMapping ("user/logout")
+    public String logout (Model model){
+        return "user/logout";
     }
 
 }

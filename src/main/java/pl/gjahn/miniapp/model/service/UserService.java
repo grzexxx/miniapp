@@ -17,6 +17,9 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    SessionService sessionService;
+
     public boolean registerUser(RegisterForm registerForm) {
 
         if (userRepository.existsByEmail(registerForm.getEmail()) || !passwordMatches(registerForm.getPassword(), registerForm.getRepeatedPassword())) {
@@ -41,24 +44,30 @@ public class UserService {
             Optional<UserEntity> userToCheck = userRepository.findByEmail(loginForm.getEmail());
 
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            return (passwordEncoder.matches(loginForm.getPassword(), userToCheck.get().getPassword()));
+            boolean passwordCorrect = passwordEncoder.matches(loginForm.getPassword(), userToCheck.get().getPassword());
+            if (passwordCorrect) {
+                sessionService.setLogin(true);
+                sessionService.setNickname(userToCheck.get().getNickname());
+                sessionService.setUserId(userToCheck.get().getId());
+            }
+            return passwordCorrect;
 
         }
         return false;
     }
 
-    public boolean passwordMatches(String password , String repeatPassword) {
+    public boolean passwordMatches(String password, String repeatPassword) {
         if (password.equals(repeatPassword)) {
             return true;
         }
         return false;
     }
 
-    public boolean emailExist (String emailToCheck){
-        return userRepository.existsByEmail( emailToCheck);
+    public boolean emailExist(String emailToCheck) {
+        return userRepository.existsByEmail(emailToCheck);
     }
 
-    public boolean emailChecker (String emailToCheck){
-       return false;
+    public boolean emailChecker(String emailToCheck) {
+        return false;
     }
 }
