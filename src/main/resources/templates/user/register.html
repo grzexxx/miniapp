@@ -13,12 +13,16 @@
 
     <header style="color: aqua"> <h1> Fill register form </h1></header>
 
-    <div th:if="${isRegistered !=null && !isRegistered}" class="alert alert-danger" role="alert">
+    <div th:if="${isEmailExist}" class="alert alert-warning" role="alert">
         Email is used!
     </div>
 
-    <div th:if="${isRegister}" class="alert alert-success" role="alert">
-        Done!
+    <div th:if="${isRegistered !=null && !isRegistered}" class="alert alert-danger" role="alert">
+        Register error!
+    </div>
+
+    <div th:if="${isPasswordMatches}" class="alert alert-dark" role="alert">
+        Passwords dont match!
     </div>
     <br/>
 
@@ -26,7 +30,7 @@
         Nickname: <input th:field="*{nickname}" type="text"><br/>
         Email: <input th:field="*{email}" type="text"><br/>
         Password: <input th:field="*{password}" type="password"><br/>
-        Password again: <input th:field ="*{repeatPassword}" type="password"><br/>
+        Password again: <input th:field ="*{repeatedPassword}" type="password"><br/>
 
         <input type="submit" value="Register">
 

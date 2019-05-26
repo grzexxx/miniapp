@@ -19,7 +19,7 @@ public class UserService {
 
     public boolean registerUser(RegisterForm registerForm) {
 
-        if (userRepository.existsByEmail(registerForm.getEmail())) {
+        if (userRepository.existsByEmail(registerForm.getEmail()) || !passwordMatches(registerForm.getPassword(), registerForm.getRepeatedPassword())) {
             return false;
         } else {
             String passwordHash = getBCrypt().encode(registerForm.getPassword());
@@ -41,21 +41,24 @@ public class UserService {
             Optional<UserEntity> userToCheck = userRepository.findByEmail(loginForm.getEmail());
 
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            if (passwordEncoder.matches(loginForm.getPassword(), userToCheck.get().getPassword())) {
-
-                return true;
-            }
-            return false;
+            return (passwordEncoder.matches(loginForm.getPassword(), userToCheck.get().getPassword()));
 
         }
         return false;
     }
 
-    public boolean passwordMatches (RegisterForm registerForm){
-        if (registerForm.getPassword().equals(registerForm.getRepeatedPassword())){
+    public boolean passwordMatches(String password , String repeatPassword) {
+        if (password.equals(repeatPassword)) {
             return true;
         }
         return false;
     }
 
+    public boolean emailExist (String emailToCheck){
+        return userRepository.existsByEmail( emailToCheck);
+    }
+
+    public boolean emailChecker (String emailToCheck){
+       return false;
+    }
 }

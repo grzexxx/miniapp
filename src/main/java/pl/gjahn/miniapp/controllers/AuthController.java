@@ -28,12 +28,18 @@ public class AuthController {
 
         System.out.println(registerForm);
         boolean isRegistered = userService.registerUser(registerForm);
+        boolean isEmailExist = userService.emailExist(registerForm.getEmail());
+        boolean isPasswordMatches = !(userService.passwordMatches(registerForm.getPassword(), registerForm.getRepeatedPassword()));
+
         if (isRegistered) {
             return "redirect:/user/login";
         }
 
         model.addAttribute("isRegistered", isRegistered);
+        model.addAttribute("isEmailExist", isEmailExist);
+        model.addAttribute("isPasswordMatches", isPasswordMatches);
         registerForm.setPassword("");
+        registerForm.setRepeatedPassword("");
         return "user/register";
     }
 
@@ -48,11 +54,15 @@ public class AuthController {
 
         boolean isLogged = userService.loginUser(loginForm);
         if (userService.loginUser(loginForm)) {
-            return "user/logged";
+            return "redirect:/user/logged";
         }
         model.addAttribute("isLogged", isLogged);
         return "user/login";
 
+    }
+    @GetMapping ("/user/logged")
+    public String logged (Model model){
+        return "user/logged";
     }
 
 }
