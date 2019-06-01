@@ -58,18 +58,22 @@ public class PostController {
     @GetMapping("/user/post/details_post/{id}")
     public String addComment(@PathVariable("id") int id, Model model) {
         model.addAttribute("post", postService.getPost(id));
+        model.addAttribute("comments", postService.getAllCommentsByPost(id));
         model.addAttribute("commentForm", new CommentForm());
 
         return "user/post/details_post";
     }
 
     @PostMapping("/comment/add/{postId}")
-    public String addComment(@ModelAttribute CommentForm commentForm, @PathVariable("postId") int postId) {
-        if(!sessionService.isLogin()){
+    public String addComment(@ModelAttribute CommentForm commentForm, @PathVariable("postId") int postId, Model model) {
+        if (!sessionService.isLogin()) {
             return "redirect:/user/login";
         }
-        //todo
-        return "redirect:/user/login";
+
+        postService.addComment(commentForm, postId, sessionService.getUserId());
+        return "redirect:/user/post/details_post/" + postId;
+
+
     }
 
 }

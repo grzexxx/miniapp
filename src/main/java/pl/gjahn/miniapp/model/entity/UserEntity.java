@@ -36,6 +36,7 @@ public class UserEntity {
         this.email = registerForm.getEmail();
         this.nickname = registerForm.getNickname();
         this.password = registerForm.getPassword();
+        this.accountType = AccountType.USER;
 
     }
 }

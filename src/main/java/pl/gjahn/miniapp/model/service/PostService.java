@@ -39,7 +39,7 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public Iterable<PostEntity> getAllPosts(){
+    public Iterable<PostEntity> getAllPosts() {
         return postRepository.findTop10ByOrderByIdDesc();
     }
 
@@ -51,13 +51,27 @@ public class PostService {
         return postRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
-    public void addComment (CommentForm commentForm, int postId, int userId){
-        PostEntity postEntity = new PostEntity();
-        postEntity.setId(postId) ;
+    public void addComment(CommentForm commentForm, int postId, int userId) {
 
-       //todo UserEntity userEntity = n
+        CommentEntity comment = new CommentEntity();
+
+        comment.setComment(commentForm.getComment());
+
+        PostEntity post = new PostEntity();
+        post.setId(postId);
+
+        UserEntity user = new UserEntity();
+        user.setId(userId);
+
+        comment.setUser(user);
+        comment.setPost(post);
+
+        commentRepository.save(comment);
     }
 
-    //public List<CommentEntity> getAll
-            //todo zeby nie odowływać sie do repozytorim bezpośrenidip
+    public List<CommentEntity> getAllCommentsByPost(int id) {
+        return commentRepository.findCommentsByPostId(id);
+    }
 }
+
+
