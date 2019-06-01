@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail post</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<th:block th:replace="user/inc/nav :: nav"></th:block>
+
+<center>
+    <h1> Post</h1>
+    <div style="width: 60%; margin-top: 80px">
+
+        <div class="card">
+            <h5 class="card-header" th:text="${post.getPostName()}"></h5>
+            <div class="card-body">
+                <h6 class="card-title">Author:<b th:text="${post.getUser().getNickname()}"></b></h6>
+                <p class="card-text" style="overflow:hidden " th:text="${post.getPostText()}"></p>
+            </div>
+
+            <div class="card-footer">
+                <small class="text-muted">Add date: <strong th:text="${post.getCreationTime()}"></strong></small>
+            </div>
+        </div>
+        <br/>
+
+<!--<th:block th:each="comment : ${comments}" </th:block>-->
+
+        <div style="max-height: 500px">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text" th:text="comment"></p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Add date and author: <strong th:text="${post.getCreationTime()}"></strong>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div style="width: 100%" class="jumbotron">
+            <form th:action="${'/comment/add/' + post.getId()}" method="post">
+
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Give comment"> </input>
+                </div>
+                <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
+
+
+            </form>
+
+        </div>
+    </div>
+
+
+</center>
+
+</body>
+</html>

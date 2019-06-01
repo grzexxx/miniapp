@@ -4,22 +4,17 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
-
 
 @Entity
-@Table(name = "post")
+@Table(name = "comment")
 @Data
-public class PostEntity {
+public class CommentEntity {
 
 
     @Id
     @GeneratedValue
     private int id;
-    @Column(name = "post_title")
-    private String postName;
-    @Column(name = "post_text")
-    private String postText;
+    private String comment;
 
     @Column(name = "creation_date")
     private LocalDateTime creationTime;
@@ -28,9 +23,15 @@ public class PostEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-   @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
-    private List<CommentEntity> comments;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private PostEntity post;
 
+
+    public CommentEntity() {
+    }
 
 }
+
+
 
