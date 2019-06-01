@@ -10,12 +10,14 @@
 <body>
 
 <th:block th:replace="user/inc/nav :: nav"></th:block>
+<h1><br/></h1>
+
+<header style="color: aqua"><h1> Fill to login </h1></header>
+<br/>
 
 <div th:if="${isLogged !=null && !isLogged}" class="alert alert-danger" role="alert">
     Email or password dont match!
 </div>
-
-<header style="color: aqua"><h1> Fill to login </h1></header>
 
 <form action="/user/login" method="post" th:object="${loginForm}">
 

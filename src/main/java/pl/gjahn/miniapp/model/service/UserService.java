@@ -49,6 +49,8 @@ public class UserService {
                 sessionService.setLogin(true);
                 sessionService.setNickname(userToCheck.get().getNickname());
                 sessionService.setUserId(userToCheck.get().getId());
+                sessionService.setAccountType(userToCheck.get().getAccountType());
+
             }
             return passwordCorrect;
 
@@ -60,6 +62,7 @@ public class UserService {
         sessionService.setLogin(false);
         sessionService.setNickname("");
         sessionService.setUserId(-1);
+
         return true;
     }
 

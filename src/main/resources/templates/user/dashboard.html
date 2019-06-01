@@ -24,7 +24,8 @@
                 <div class="card-body">
 
                     <p class="card-text" style="overflow:hidden " th:text="${post.getPostText()}"></p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="#" class="btn btn-primary">Comment</a>
+                    <a th:if="${userSession.getAccountType().name() == 'ADMIN'}" th:href="${'/user/post/delete/' + post.getId()}" class="btn btn-primary">Del</a>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Last comment: 5 min ago</small>

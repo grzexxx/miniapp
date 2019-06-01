@@ -25,6 +25,7 @@ public class PostService {
         UserEntity user = new UserEntity();
         user.setId(sessionService.getUserId());
 
+
         post.setUser(user);
 
         postRepository.save(post);
@@ -32,5 +33,9 @@ public class PostService {
 
     public Iterable<PostEntity> getAllPosts(){
         return postRepository.findTop10ByOrderByIdDesc();
+    }
+
+    public void deletePost(int id) {
+        postRepository.deleteById(id);
     }
 }

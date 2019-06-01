@@ -57,10 +57,12 @@ public class AuthController {
     public String login(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
 
         boolean isLogged = userService.loginUser(loginForm);
+        boolean power = userService.loginUser(loginForm);
         if (userService.loginUser(loginForm)) {
             return "redirect:/user/dashboard";
         }
         model.addAttribute("isLogged", isLogged);
+        model.addAttribute("power", power);
         return "user/login";
 
     }
