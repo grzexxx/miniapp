@@ -21,11 +21,16 @@
             <div class="card-body">
                 <h6 class="card-title">Author:<b th:text="${post.getUser().getNickname()}"></b></h6>
                 <p class="card-text" style="overflow:hidden " th:text="${post.getPostText()}"></p>
+
+                <a th:if="${owner}" th:href="${'/user/post/delete/' + post.getId()}" class="btn btn-primary">Del your post</a>
+
+
             </div>
 
             <div class="card-footer">
                 <small class="text-muted">Add date: <strong th:text="${post.getCreationTime()}"></strong></small>
             </div>
+
         </div>
         <br/>
 

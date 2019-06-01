@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Integer> {
 
-    Optional<UserEntity> findByEmail(String email); //zapytanie czytane są po nazwach metod
+    Optional<UserEntity> findByEmail(String email);
 
     boolean existsByEmail(String email);
 

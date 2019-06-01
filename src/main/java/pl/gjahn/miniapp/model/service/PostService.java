@@ -24,6 +24,9 @@ public class PostService {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    PostService postService;
+
     public void addPost(PostForm postForm) {
         PostEntity post = new PostEntity();
 
@@ -72,6 +75,11 @@ public class PostService {
     public List<CommentEntity> getAllCommentsByPost(int id) {
         return commentRepository.findCommentsByPostId(id);
     }
+
+    public boolean userIsPostOwner(int postId) {
+        return ( postService.getPost(postId).getUser().getId()== sessionService.getUserId());
+    }
+
 }
 
 

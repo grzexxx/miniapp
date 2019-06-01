@@ -47,19 +47,33 @@ public class PostController {
 
     @GetMapping("user/post/delete/{id}")
     public String deletePost(@PathVariable("id") int id) {
-        if (sessionService.getAccountType() != UserEntity.AccountType.ADMIN) {
-            return "redirect:/user/dashboard";
-        }
+        if (sessionService.getAccountType() != UserEntity.AccountType.ADMIN && !postService.userIsPostOwner(id)) {
+            System.out.println("NOT ADMIN OR POST OWNER");
 
+            System.out.println(sessionService.getUserId());
+            System.out.println(postService.userIsPostOwner(id));
+            return "redirect:/user/dashboard";
+
+        }
+        System.out.println("CAN DELL");
+        System.out.println(sessionService.getUserId());
+        //  System.out.println(postService.getPostUserId(id));
         postService.deletePost(id);
         return "redirect:/user/dashboard";
     }
 
     @GetMapping("/user/post/details_post/{id}")
     public String addComment(@PathVariable("id") int id, Model model) {
+
         model.addAttribute("post", postService.getPost(id));
         model.addAttribute("comments", postService.getAllCommentsByPost(id));
         model.addAttribute("commentForm", new CommentForm());
+
+        model.addAttribute("owner", postService.userIsPostOwner(id));
+        System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+        System.out.println(postService.getPost(id).getUser().getId());
+        System.out.println(sessionService.getUserId());
+        System.out.println(postService.userIsPostOwner(id));
 
         return "user/post/details_post";
     }
