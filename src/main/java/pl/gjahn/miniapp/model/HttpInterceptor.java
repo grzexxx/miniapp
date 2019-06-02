@@ -22,8 +22,10 @@ public class HttpInterceptor  implements HandlerInterceptor , WebMvcConfigurer {
         registry.addInterceptor(this);
     }
 
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
         return true;
     }
 

@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.gjahn.miniapp.model.dto.PostDto;
 import pl.gjahn.miniapp.model.entity.PostEntity;
-import pl.gjahn.miniapp.model.repository.PostRepository;
 import pl.gjahn.miniapp.model.service.PostService;
+import pl.gjahn.miniapp.model.service.UserService;
 
 import java.util.Optional;
 
@@ -17,6 +17,11 @@ public class PostControllerApi {
 
     @Autowired
     PostService postService;
+
+    @Autowired
+    UserService userService;
+
+    private final String API_KEY = "8n4yteahfvsawebeat5427609pmlfytRQBRVDsaddddwn..wevfsdffdfdff";
 
     @GetMapping("/post")
     public ResponseEntity getAllPosts() {
@@ -37,10 +42,18 @@ public class PostControllerApi {
     }
 
     @PostMapping(value = "/post", consumes = "application/json")
-    public ResponseEntity savePost(@RequestBody PostDto postDto) {
+    public ResponseEntity savePost(@RequestBody PostDto postDto, @RequestHeader("api-key") String key) {
 
-       return ResponseEntity.ok(
-               postService.addPost(postDto)
-       );
+        if (!key.equals(API_KEY)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        if (!userService.idExist(postDto.getUserId())) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user with that id");
+        }
+
+        return ResponseEntity.ok(
+                postService.addPost(postDto)
+        );
     }
 }

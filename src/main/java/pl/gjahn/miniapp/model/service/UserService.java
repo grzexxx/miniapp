@@ -77,6 +77,10 @@ public class UserService {
         return userRepository.existsByEmail(emailToCheck);
     }
 
+    public boolean idExist (int idToCheck){
+        return userRepository.existsById(idToCheck);
+    }
+
     public boolean emailChecker(String emailToCheck) {
         return false;
     }
