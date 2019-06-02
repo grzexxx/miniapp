@@ -1,5 +1,6 @@
 package pl.gjahn.miniapp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import pl.gjahn.miniapp.model.form.RegisterForm;
 
@@ -21,7 +22,9 @@ public class UserEntity {
     @GeneratedValue
     private int id;
     private String nickname;
+    @JsonIgnore
     private String email;
+    @JsonIgnore
     private String password;
 
     @Column (name = "account_type")

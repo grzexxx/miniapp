@@ -1,7 +1,9 @@
 package pl.gjahn.miniapp.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import pl.gjahn.miniapp.model.entity.CommentEntity;
 import pl.gjahn.miniapp.model.entity.PostEntity;
 import pl.gjahn.miniapp.model.entity.UserEntity;
@@ -11,6 +13,7 @@ import pl.gjahn.miniapp.model.repository.CommentRepository;
 import pl.gjahn.miniapp.model.repository.PostRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -80,6 +83,10 @@ public class PostService {
         return ( postService.getPost(postId).getUser().getId()== sessionService.getUserId());
     }
 
+
+    public Optional<PostEntity> getPostOptional(int id) {
+        return postRepository.findById(id);
+    }
 }
 
 
