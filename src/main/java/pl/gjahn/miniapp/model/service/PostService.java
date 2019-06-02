@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import pl.gjahn.miniapp.model.dto.PostDto;
 import pl.gjahn.miniapp.model.entity.CommentEntity;
 import pl.gjahn.miniapp.model.entity.PostEntity;
 import pl.gjahn.miniapp.model.entity.UserEntity;
@@ -43,6 +44,10 @@ public class PostService {
         post.setUser(user);
 
         postRepository.save(post);
+    }
+
+    public PostEntity addPost (PostDto postDto){
+        return postRepository.save(PostDto.convertToEntity(postDto));
     }
 
     public Iterable<PostEntity> getAllPosts() {
