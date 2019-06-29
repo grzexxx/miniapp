@@ -39,6 +39,9 @@ public class UserServiceTest {
     @Autowired
     MockMvc mockMvc;
 
+    @Autowired
+    SessionService sessionService;
+
     @Test
     public void shouldLoginForCorrectData() {
 //given
@@ -53,10 +56,11 @@ public class UserServiceTest {
         Optional<UserEntity> responseFromDatabase = Optional.of(userEntity);
 
 //when
+        when(userRepository.existsByEmail(loginForm.getEmail())).thenReturn(true);
         when(userRepository.findByEmail(loginForm.getEmail())).thenReturn(responseFromDatabase);
 //then
 
-        Assertions.assertThat(!userService.loginUser(loginForm)).isTrue();
+        Assertions.assertThat(userService.loginUser(loginForm)).isTrue();
     }
 
     @Test
@@ -104,12 +108,7 @@ public class UserServiceTest {
 
     }
 
-    @Test
-    public void isSessionMakingAfterCorrectLogin(){
-
-
-
-    }
+}
 
    /* public void shouldControllerLoginUser() throws Exception {
         //given
@@ -134,4 +133,3 @@ public class UserServiceTest {
         ).andExpect(status().is3xxRedirection());
 
     }*/
-}
