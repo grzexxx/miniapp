@@ -26,14 +26,12 @@
                 <a th:if="${userSession.isLogin()} " class="nav-link" href="/user/logout">Logout</a>
                 <a th:if="${!userSession.isLogin()} " class="nav-link" href="/user/login">Login</a>
             </li>
-
             <li class="nav-item">
                 <a th:if="${userSession.isLogin()} " class="text" th:text="${userSession.getNickname()}"> </a>
-                <a th:if="${!userSession.isLogin()} " class="text">No one</a>
+                <a th:if="${!userSession.isLogin()} " class="text">Unknown</a>
             </li>
-
-
         </ul>
+
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

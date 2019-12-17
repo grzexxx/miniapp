@@ -14,7 +14,7 @@
 
 <center>
     <h1> Dashboard</h1>
-    <div style="width: 60%; margin-top: 50px">
+    <div style="width: 70%; margin-top: 45px">
 
         <div th:if="${info != null}" th:text="${info}" class="alert alert-success" role="alert"></div>
 
@@ -28,7 +28,7 @@
                     <a th:if="${userSession.getAccountType().name() == 'ADMIN'}" th:href="${'/user/post/delete/' + post.getId()}" class="btn btn-primary">Del</a>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Last comment: 5 min ago</small>
+                    <small class="text-muted" th:text="${post.getCreationTime()}"></small>
                 </div>
             </div>
             <br/>
