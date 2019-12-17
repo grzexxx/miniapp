@@ -26,6 +26,7 @@ public class UserEntity {
     private String email;
     @JsonIgnore
     private String password;
+    private String aboutMe;
 
     @Column (name = "account_type")
     @Enumerated (EnumType.STRING)
@@ -40,6 +41,7 @@ public class UserEntity {
         this.nickname = registerForm.getNickname();
         this.password = registerForm.getPassword();
         this.accountType = AccountType.USER;
+        this.aboutMe = registerForm.getAboutMe();
 
     }
 }

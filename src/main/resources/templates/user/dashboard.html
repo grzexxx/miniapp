@@ -24,10 +24,11 @@
                 <div class="card-body">
 
                     <p class="card-text" style="overflow:hidden " th:text="${post.getPostText()}"></p>
-                    <a th:href="${'/user/post/details_post/' + post.getId()}" class="btn btn-primary">Comment</a>
-                    <a th:if="${userSession.getAccountType().name() == 'ADMIN'}" th:href="${'/user/post/delete/' + post.getId()}" class="btn btn-primary">Del</a>
+                    <a th:href="${'/user/post/details_post/' + post.getId()}" class="btn btn-primary">Add Comment</a>
+                    <a th:if="${userSession.getAccountType().name() == 'ADMIN'}" th:href="${'/user/post/delete/' + post.getId()}" class="btn btn-primary">Delete</a>
                 </div>
                 <div class="card-footer">
+                    <small class="text-muted"> Created: </small>
                     <small class="text-muted" th:text="${post.getCreationTime()}"></small>
                 </div>
             </div>

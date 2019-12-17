@@ -15,4 +15,6 @@ public class RegisterForm {
     @Pattern( regexp = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$" , message = "Wrong email")
     private String email;
 
+    private String aboutMe;
+
 }
